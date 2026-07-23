@@ -1,0 +1,19 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  icon: "food" | "water" | "volunteers" | "transparency";
+  title: string;
+  description: string;
+}
+
+const { icon, title, description } = Astro.props;
+---
+
+<div class="rounded-card bg-white p-6 shadow-soft">
+  <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-saffron-soft text-saffron">
+    <Icon name={icon} />
+  </div>
+  <h3 class="text-lg font-semibold text-charcoal">{title}</h3>
+  <p class="mt-2 text-sm text-charcoal-soft">{description}</p>
+</div>

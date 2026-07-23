@@ -1,0 +1,84 @@
+---
+interface Props {
+  name: "food" | "water" | "volunteers" | "transparency" | "telegram" | "mail" | "whatsapp" | "check";
+  class?: string;
+}
+
+const { name, class: className = "w-6 h-6" } = Astro.props;
+---
+
+{
+  name === "food" && (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class={className} aria-hidden="true">
+      <path d="M4 3v7a3 3 0 0 0 3 3v8" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M4 3v5M8 3v5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M16 3c-2 1.5-2 4-2 6s1 4 2 5v7" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+{
+  name === "water" && (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class={className} aria-hidden="true">
+      <path
+        d="M12 3s6 6.5 6 11a6 6 0 1 1-12 0c0-4.5 6-11 6-11Z"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  )
+}
+{
+  name === "volunteers" && (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class={className} aria-hidden="true">
+      <circle cx="9" cy="8" r="3" />
+      <circle cx="17" cy="9" r="2.5" />
+      <path d="M3.5 20c.5-3.5 3-5.5 5.5-5.5s5 2 5.5 5.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M14.5 15c2 .2 3.7 1.9 4 5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+{
+  name === "transparency" && (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class={className} aria-hidden="true">
+      <path d="M12 3 4 6.5V11c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6.5L12 3Z" stroke-linejoin="round" />
+      <path d="m9 12 2 2 4-4" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+{
+  name === "telegram" && (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class={className} aria-hidden="true">
+      <path
+        d="m21 4-18.5 7.3c-.6.25-.6.7 0 .9l4.6 1.5m14-9.7-5.5 15.6c-.2.6-.7.65-1 .2l-3.9-5.4m10.4-10.4-9.6 8.3m9.6-8.3-3.9 12.8c-.15.5-.6.5-.9.1l-1.7-2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  )
+}
+{
+  name === "whatsapp" && (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class={className} aria-hidden="true">
+      <path
+        d="M4 20l1.3-3.9A8 8 0 1 1 8.6 19L4 20Z"
+        stroke-linejoin="round"
+      />
+      <path d="M8.5 9.5c0 3.5 2.5 6 6 6" stroke-linecap="round" />
+    </svg>
+  )
+}
+{
+  name === "mail" && (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class={className} aria-hidden="true">
+      <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
+      <path d="m4 7 8 6 8-6" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+{
+  name === "check" && (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class={className} aria-hidden="true">
+      <path d="m5 12 5 5 9-10" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}

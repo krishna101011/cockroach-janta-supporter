@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import Badge from "../components/Badge.astro";
+import QRContributionCard from "../components/QRContributionCard.astro";
+import { SITE, HERO, CONTRIBUTE } from "../data/config";
+---
+
+<BaseLayout
+  title="Contribute"
+  description="Scan the QR code or use the UPI ID to send food and water support directly to people at the protest. Voluntary, transparent, and takes under 30 seconds."
+>
+  <section class="section-padding">
+    <div class="content-container max-w-3xl text-center">
+      <Badge>{HERO.trustBadge}</Badge>
+      <SectionHeading class="mt-5" title={CONTRIBUTE.h2} subtitle={CONTRIBUTE.subhead} />
+      <p class="mx-auto mt-4 max-w-xl text-sm text-charcoal-soft">
+        {SITE.name} is an independent, volunteer-run initiative — not affiliated with any party or the protest's
+        leadership. See how funds are used on the <a href="/transparency" class="font-medium text-green underline">Transparency page</a>.
+      </p>
+    </div>
+
+    <div class="content-container mt-10 max-w-3xl">
+      <QRContributionCard />
+    </div>
+
+    <div class="content-container mt-8 max-w-3xl text-center text-sm text-charcoal-soft">
+      Not ready to contribute money? <a href="/telegram" class="font-medium text-green underline">Join the Telegram group</a>
+      instead — there are other ways to help.
+    </div>
+  </section>
+</BaseLayout>

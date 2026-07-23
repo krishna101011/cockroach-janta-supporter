@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import ContactForm from "../components/ContactForm.astro";
+import { CONTACT } from "../data/config";
+---
+
+<BaseLayout
+  title="Contact"
+  description="Questions about Cockroach Janta Supporter, want to volunteer, or something doesn't look right? Reach out."
+>
+  <section class="section-padding">
+    <div class="content-container max-w-4xl">
+      <SectionHeading title={CONTACT.h2} subtitle={CONTACT.subhead} />
+      <div class="mt-10">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

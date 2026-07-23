@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import FAQAccordion from "../components/FAQAccordion.astro";
+import { FAQ_ITEMS } from "../data/config";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<BaseLayout
+  title="Frequently Asked Questions"
+  description="Answers to common questions about Cockroach Janta Supporter: what we do, how to contribute, where the money goes, and how to join Telegram."
+  jsonLd={faqSchema}
+>
+  <section class="section-padding">
+    <div class="content-container max-w-3xl">
+      <SectionHeading title="Frequently Asked Questions" />
+      <div class="mt-10">
+        <FAQAccordion />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

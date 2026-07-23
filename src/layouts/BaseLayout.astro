@@ -1,0 +1,66 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import MobileNav from "../components/MobileNav.astro";
+import Footer from "../components/Footer.astro";
+import { SITE, PLACEHOLDERS } from "../data/config";
+
+interface Props {
+  title: string;
+  description?: string;
+  isHome?: boolean;
+  jsonLd?: object | object[];
+}
+
+const { title, description = SITE.defaultDescription, isHome = false, jsonLd } = Astro.props;
+
+const pageTitle = isHome ? title : `${title} · ${SITE.name}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(PLACEHOLDERS.OG_IMAGE, Astro.site);
+const schemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </head>
+  <body class="min-h-screen bg-cream text-charcoal antialiased">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:shadow-soft"
+    >
+      Skip to content
+    </a>
+
+    <Navbar isHome={isHome} />
+
+    <main id="main-content" class="pb-20 md:pb-0">
+      <slot />
+    </main>
+
+    <Footer isHome={isHome} />
+    <MobileNav isHome={isHome} />
+  </body>
+</html>

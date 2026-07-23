@@ -1,0 +1,75 @@
+---
+import { NAV_LINKS, FOOTER_EXTRA_LINKS, SITE, FOOTER_DISCLAIMER, PLACEHOLDERS } from "../data/config";
+
+interface Props {
+  isHome?: boolean;
+}
+
+const { isHome = false } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-charcoal/10 bg-white pb-24 pt-14 md:pb-14">
+  <div class="content-container">
+    <div class="flex flex-col gap-10 md:flex-row md:justify-between">
+      <div class="max-w-sm">
+        <p class="font-display text-lg font-semibold text-charcoal">{SITE.name}</p>
+        <p class="mt-2 text-sm text-charcoal-soft">{SITE.tagline}</p>
+
+        <div class="mt-4 flex flex-wrap gap-3 text-sm text-charcoal-soft">
+          {
+            PLACEHOLDERS.TELEGRAM_LINK ? (
+              <a href={PLACEHOLDERS.TELEGRAM_LINK} class="hover:text-charcoal">
+                Telegram
+              </a>
+            ) : null
+          }
+          {
+            PLACEHOLDERS.WHATSAPP_LINK ? (
+              <a href={PLACEHOLDERS.WHATSAPP_LINK} class="hover:text-charcoal">
+                WhatsApp
+              </a>
+            ) : null
+          }
+          {
+            PLACEHOLDERS.INSTAGRAM_LINK ? (
+              <a href={PLACEHOLDERS.INSTAGRAM_LINK} class="hover:text-charcoal">
+                Instagram
+              </a>
+            ) : null
+          }
+          {
+            PLACEHOLDERS.CONTACT_EMAIL ? (
+              <a href={`mailto:${PLACEHOLDERS.CONTACT_EMAIL}`} class="hover:text-charcoal">
+                Email
+              </a>
+            ) : null
+          }
+        </div>
+      </div>
+
+      <nav class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm sm:grid-cols-3" aria-label="Footer">
+        {
+          NAV_LINKS.map((link) => (
+            <a href={isHome ? `#${link.id}` : link.standalone} class="text-charcoal-soft hover:text-charcoal">
+              {link.label}
+            </a>
+          ))
+        }
+        {
+          FOOTER_EXTRA_LINKS.map((link) => (
+            <a href={link.href} class="text-charcoal-soft hover:text-charcoal">
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+
+    <p class="mt-10 max-w-3xl text-xs leading-relaxed text-charcoal-soft">
+      {FOOTER_DISCLAIMER}
+    </p>
+
+    <p class="mt-6 text-xs text-charcoal-soft">&copy; {year} {SITE.name}. Not an official channel of any party or organization.</p>
+  </div>
+</footer>

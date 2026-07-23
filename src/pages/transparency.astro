@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import CTAButton from "../components/CTAButton.astro";
+import { TRANSPARENCY } from "../data/config";
+---
+
+<BaseLayout
+  title="Transparency"
+  description="See exactly where contributions to Cockroach Janta Supporter go: food, water, and delivery costs — nothing else."
+>
+  <section class="section-padding">
+    <div class="content-container max-w-2xl text-center">
+      <SectionHeading title={TRANSPARENCY.h2} subtitle={TRANSPARENCY.body} />
+
+      <ul class="mt-10 grid gap-4 sm:grid-cols-2">
+        {
+          TRANSPARENCY.breakdown.map((item) => (
+            <li class="rounded-card bg-white px-5 py-4 text-center text-sm font-medium text-charcoal-soft shadow-soft">
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mt-10">
+        <CTAButton href="/contribute" variant="primary" size="lg">Contribute Now</CTAButton>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

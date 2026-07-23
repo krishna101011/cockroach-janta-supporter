@@ -1,0 +1,106 @@
+---
+import { CONTRIBUTE, PLACEHOLDERS } from "../data/config";
+
+const { UPI_ID, QR_IMAGE } = PLACEHOLDERS;
+---
+
+<div class="grid gap-8 rounded-card bg-white p-6 shadow-soft md:grid-cols-[minmax(0,220px)_1fr] md:p-10">
+  <div class="mx-auto flex w-full max-w-[220px] flex-col items-center gap-3">
+    <div class="flex aspect-square w-full items-center justify-center rounded-2xl border border-dashed border-charcoal/15 bg-cream p-3">
+      {
+        QR_IMAGE ? (
+          <img src={QR_IMAGE} alt="QR code to contribute via UPI" class="h-full w-full object-contain" />
+        ) : (
+          <p class="text-center text-sm text-charcoal-soft">QR code coming soon</p>
+        )
+      }
+    </div>
+
+    <div class="w-full text-center">
+      {
+        UPI_ID ? (
+          <button
+            id="copy-upi"
+            type="button"
+            data-upi={UPI_ID}
+            class="w-full rounded-full border border-green/30 px-4 py-2 text-sm font-semibold text-green"
+          >
+            <span id="copy-upi-label">{UPI_ID} · Copy</span>
+          </button>
+        ) : (
+          <p class="rounded-full bg-green-soft px-4 py-2 text-sm font-medium text-green">UPI ID coming soon</p>
+        )
+      }
+    </div>
+  </div>
+
+  <div>
+    <ol class="space-y-3">
+      {
+        CONTRIBUTE.steps.map((step, i) => (
+          <li class="flex gap-3 text-sm text-charcoal-soft">
+            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-saffron-soft text-xs font-semibold text-saffron">
+              {i + 1}
+            </span>
+            <span class="pt-0.5">{step}</span>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="mt-6 text-sm text-charcoal-soft">{CONTRIBUTE.trustLine}</p>
+
+    <button
+      id="share-page"
+      type="button"
+      class="mt-6 inline-flex items-center gap-2 rounded-full bg-charcoal px-5 py-2.5 text-sm font-semibold text-white"
+    >
+      {CONTRIBUTE.shareLabel}
+    </button>
+  </div>
+</div>
+
+<script>
+  const copyBtn = document.getElementById("copy-upi");
+  copyBtn?.addEventListener("click", async () => {
+    const upi = copyBtn.getAttribute("data-upi");
+    const label = document.getElementById("copy-upi-label");
+    if (!upi || !label) return;
+    try {
+      await navigator.clipboard.writeText(upi);
+      const original = label.textContent;
+      label.textContent = "Copied!";
+      setTimeout(() => {
+        label.textContent = original;
+      }, 1800);
+    } catch {
+      // Clipboard API unavailable — UPI ID is already visible as text to copy manually.
+    }
+  });
+
+  const shareBtn = document.getElementById("share-page");
+  shareBtn?.addEventListener("click", async () => {
+    const shareData = {
+      title: document.title,
+      text: "Help provide food and water to people at the protest.",
+      url: window.location.href,
+    };
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch {
+        // user cancelled share sheet
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        shareBtn.textContent = "Link copied!";
+        setTimeout(() => {
+          shareBtn.textContent = "Share This Page";
+        }, 1800);
+      } catch {
+        // no-op — clipboard unavailable
+      }
+    }
+  });
+</script>

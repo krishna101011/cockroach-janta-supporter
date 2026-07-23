@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import InfoCard from "../components/InfoCard.astro";
+import CTAButton from "../components/CTAButton.astro";
+import { MISSION, HOW_WE_HELP } from "../data/config";
+---
+
+<BaseLayout
+  title="Our Mission"
+  description="Cockroach Janta Supporter is an independent protest relief initiative providing food and drinking water. Here's what we actually do."
+>
+  <section class="section-padding">
+    <div class="content-container max-w-2xl text-center">
+      <SectionHeading title={MISSION.h2} />
+      <p class="mt-6 text-charcoal-soft">{MISSION.body}</p>
+    </div>
+  </section>
+
+  <section class="section-padding bg-white">
+    <div class="content-container">
+      <SectionHeading title={HOW_WE_HELP.h2} />
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {HOW_WE_HELP.cards.map((card) => <InfoCard icon={card.icon} title={card.title} description={card.description} />)}
+      </div>
+      <div class="mt-10 text-center">
+        <CTAButton href="/contribute" variant="primary" size="lg">Contribute Now</CTAButton>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

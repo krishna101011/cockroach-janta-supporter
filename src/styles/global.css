@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/fraunces/500.css";
+@import "@fontsource/fraunces/600.css";
+
+@theme {
+  --color-saffron: #b55e14;
+  --color-saffron-soft: #fbead8;
+  --color-green: #1f7a4d;
+  --color-green-soft: #e4f1e9;
+  --color-cream: #fdf8f0;
+  --color-charcoal: #22201d;
+  --color-charcoal-soft: #5b564e;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+
+  --radius-card: 1.25rem;
+
+  --shadow-soft: 0 8px 24px rgba(34, 32, 29, 0.08);
+
+  --container-content: 1140px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: 18px;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    line-height: 1.15;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-saffron);
+    outline-offset: 2px;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@layer utilities {
+  .content-container {
+    max-width: var(--container-content);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  .section-padding {
+    padding-block: 56px;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-block: 96px;
+    }
+  }
+}

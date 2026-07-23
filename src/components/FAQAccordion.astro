@@ -1,0 +1,26 @@
+---
+import { FAQ_ITEMS } from "../data/config";
+---
+
+<div class="divide-y divide-charcoal/10 rounded-card bg-white shadow-soft">
+  {
+    FAQ_ITEMS.map((item) => (
+      <details class="group px-6 py-2 open:pb-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-medium text-charcoal marker:content-none">
+          {item.question}
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            class="h-5 w-5 shrink-0 text-charcoal-soft transition-transform group-open:rotate-45"
+            aria-hidden="true"
+          >
+            <path d="M12 5v14M5 12h14" stroke-linecap="round" />
+          </svg>
+        </summary>
+        <p class="pr-8 text-sm text-charcoal-soft">{item.answer}</p>
+      </details>
+    ))
+  }
+</div>

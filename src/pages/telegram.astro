@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import CTAButton from "../components/CTAButton.astro";
+import { TELEGRAM, PLACEHOLDERS } from "../data/config";
+---
+
+<BaseLayout
+  title="Join Our Telegram Group"
+  description="Join the Cockroach Janta Supporter Telegram group to coordinate food and water relief, volunteer, or stay updated — no payment required."
+>
+  <section class="section-padding">
+    <div class="content-container max-w-2xl text-center">
+      <SectionHeading title={TELEGRAM.h2} subtitle={TELEGRAM.subhead} />
+      <p class="mt-4 text-sm text-charcoal-soft">{TELEGRAM.welcomeLine}</p>
+
+      <div class="mt-8">
+        {
+          PLACEHOLDERS.TELEGRAM_LINK ? (
+            <CTAButton href={PLACEHOLDERS.TELEGRAM_LINK} variant="secondary" size="lg">
+              {TELEGRAM.button}
+            </CTAButton>
+          ) : (
+            <span class="inline-flex items-center gap-2 rounded-full bg-green-soft px-6 py-3 text-sm font-medium text-green">
+              Telegram link coming soon
+            </span>
+          )
+        }
+      </div>
+
+      <p class="mt-8 text-sm text-charcoal-soft">
+        Prefer to help with food and water costs directly? <a href="/contribute" class="font-medium text-saffron underline">Contribute here</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

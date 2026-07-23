@@ -1,0 +1,115 @@
+---
+import { PLACEHOLDERS } from "../data/config";
+---
+
+<div class="grid gap-8 md:grid-cols-2">
+  <!--
+    No backend is wired up yet. Point this at a form handler (Formspree,
+    Netlify Forms, etc.) before launch by setting data-form-endpoint below.
+  -->
+  <form id="contact-form" data-form-endpoint="" class="space-y-5 rounded-card bg-white p-6 shadow-soft md:p-8" novalidate>
+    <div>
+      <label for="name" class="mb-1.5 block text-sm font-medium text-charcoal">Name</label>
+      <input
+        id="name"
+        name="name"
+        type="text"
+        required
+        class="w-full rounded-lg border border-charcoal/15 bg-cream px-4 py-2.5 text-sm outline-none focus:border-saffron"
+      />
+      <p class="field-error mt-1 hidden text-xs text-red-600">Please enter your name.</p>
+    </div>
+
+    <div>
+      <label for="email" class="mb-1.5 block text-sm font-medium text-charcoal">Email (optional)</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        class="w-full rounded-lg border border-charcoal/15 bg-cream px-4 py-2.5 text-sm outline-none focus:border-saffron"
+      />
+      <p class="field-error mt-1 hidden text-xs text-red-600">Please enter a valid email.</p>
+    </div>
+
+    <div>
+      <label for="message" class="mb-1.5 block text-sm font-medium text-charcoal">Message</label>
+      <textarea
+        id="message"
+        name="message"
+        rows="4"
+        required
+        class="w-full rounded-lg border border-charcoal/15 bg-cream px-4 py-2.5 text-sm outline-none focus:border-saffron"
+      ></textarea>
+      <p class="field-error mt-1 hidden text-xs text-red-600">Please enter a message.</p>
+    </div>
+
+    <button type="submit" class="w-full rounded-full bg-saffron px-5 py-3 text-sm font-semibold text-white">
+      Send Message
+    </button>
+
+    <p id="form-status" class="hidden text-sm" role="status"></p>
+  </form>
+
+  <div class="space-y-3">
+    <div class="flex items-center gap-3 rounded-card bg-white p-4 shadow-soft">
+      <span class="text-sm font-medium text-charcoal-soft">Telegram</span>
+      <span class="ml-auto text-sm text-charcoal">
+        {PLACEHOLDERS.TELEGRAM_LINK ? <a href={PLACEHOLDERS.TELEGRAM_LINK} class="text-green">Open chat</a> : "Coming soon"}
+      </span>
+    </div>
+    <div class="flex items-center gap-3 rounded-card bg-white p-4 shadow-soft">
+      <span class="text-sm font-medium text-charcoal-soft">WhatsApp</span>
+      <span class="ml-auto text-sm text-charcoal">
+        {PLACEHOLDERS.WHATSAPP_LINK ? <a href={PLACEHOLDERS.WHATSAPP_LINK} class="text-green">Open chat</a> : "Coming soon"}
+      </span>
+    </div>
+    <div class="flex items-center gap-3 rounded-card bg-white p-4 shadow-soft">
+      <span class="text-sm font-medium text-charcoal-soft">Email</span>
+      <span class="ml-auto text-sm text-charcoal">
+        {
+          PLACEHOLDERS.CONTACT_EMAIL ? (
+            <a href={`mailto:${PLACEHOLDERS.CONTACT_EMAIL}`} class="text-green">
+              {PLACEHOLDERS.CONTACT_EMAIL}
+            </a>
+          ) : (
+            "Coming soon"
+          )
+        }
+      </span>
+    </div>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const status = document.getElementById("form-status");
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let valid = true;
+    form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("[required]").forEach((field) => {
+      const errorEl = field.parentElement?.querySelector(".field-error");
+      const fieldValid = field.value.trim().length > 0;
+      errorEl?.classList.toggle("hidden", fieldValid);
+      if (!fieldValid) valid = false;
+    });
+
+    const emailField = form.querySelector<HTMLInputElement>("#email");
+    if (emailField && emailField.value && !emailField.checkValidity()) {
+      emailField.parentElement?.querySelector(".field-error")?.classList.remove("hidden");
+      valid = false;
+    }
+
+    if (!valid || !status) return;
+
+    const endpoint = form.dataset.formEndpoint;
+    status.classList.remove("hidden");
+    if (endpoint) {
+      status.textContent = "Sending isn't wired up in this preview.";
+    } else {
+      status.textContent = "Thanks — message handling isn't connected yet. Reach us directly via the contacts alongside this form.";
+    }
+    status.classList.add("text-charcoal-soft");
+  });
+</script>
