@@ -13,7 +13,7 @@ export const SITE = {
 // honest "coming soon" state rather than a dead link or a dummy value that
 // could be mistaken for real — never ship a fake UPI ID or example link.
 export const PLACEHOLDERS = {
-  UPI_ID: "", // {{UPI_ID}}
+  UPI_ID: "Q389569986@ybl", // {{UPI_ID}}
   QR_IMAGE: "", // {{QR_IMAGE}} — path under /public, e.g. "/qr-code.png"
   TELEGRAM_LINK: "https://t.me/+N7LvDWdKFvs0YzJl", // {{TELEGRAM_LINK}}
   WHATSAPP_LINK: "", // {{WHATSAPP_LINK}} — not used for this initiative
